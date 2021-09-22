@@ -9,16 +9,16 @@
 
 {{ config(materialized='table') }} 
 
--- , alias='first_model', schema='dbt_test'  , database='ivory-mountain-326811'
+-- , alias='first_model', schema='dbt_test'  , database='ivory-mountain-326811' , post_hook='grant select on {{this}} to role analyst' , tags=["nightly","example"]
 
-
+-- CTE(Common Table Expression)
 with source_data as (
 
-    select 1 as id
+    select 1 as id , 'NY' as state, '2020-03-01 00:01:00.000' as updated_at
     union all
-    select null as id
+    select null as id , 'CT' as state, '2020-02-01 00:00:00.000' as updated_at
     union all
-    select 3 as id
+    select 3 as id, 'VT' as state, '2020-02-01 00:00:00.000' as updated_at
 
 
 
@@ -29,6 +29,8 @@ select *
 from source_data
 -- where id is not null
 -- where id >= {{var('my_third_variable')}}
+--macro
+--  {{ group_by(3)}}
 
 /*
     Uncomment the line below to remove records with null `id` values

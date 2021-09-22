@@ -26,3 +26,14 @@ models:
                 - relationships:
                     to: ref('my_first_dbt_model')
                     field: id
+sourcess:
+  - name: 
+    database:
+    schema:
+    tables:
+      - name:
+        columns:
+          - name: 
+            tests:
+                # - unique
+                # - not_null
